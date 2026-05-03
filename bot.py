@@ -1,4 +1,5 @@
 print("BOT STARTING...")
+import asyncio
 import json, os
 from datetime import datetime
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, BotCommand
@@ -599,13 +600,9 @@ async def set_commands(app):
 
 async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE):
     print("ERROR:", context.error)
-import asyncio
 
-def main():
+async def main():
     print("Initializing bot...")
-
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
 
     app = Application.builder().token(BOT_TOKEN).post_init(set_commands).build()
 
@@ -632,8 +629,8 @@ def main():
     app.add_error_handler(error_handler)
 
     print("Bot running...")
+    await app.run_polling()   # ✅ ONLY THIS
 
-    loop.run_until_complete(app.initialize())
-    loop.run_until_complete(app.start())
-    loop.run_until_complete(app.updater.start_polling())
-    loop.run_forever()
+
+if __name__ == "__main__":
+    asyncio.run(main())
