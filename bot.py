@@ -602,36 +602,37 @@ async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE):
 
 import asyncio
 
-def main():
-    async def run():
-        app = Application.builder().token(BOT_TOKEN).post_init(set_commands).build()
+    def main():
+    app = Application.builder().token(BOT_TOKEN).post_init(set_commands).build()
 
-        app.add_handler(CommandHandler("start", start))
-        app.add_handler(CommandHandler("status", status))
-        app.add_handler(CommandHandler("profile", profile))
-        app.add_handler(CommandHandler("help", help_cmd))
-        app.add_handler(CommandHandler("myid", myid))
-        app.add_handler(CommandHandler("chatid", chatid))
+    app.add_handler(CommandHandler("start", start))
+    app.add_handler(CommandHandler("status", status))
+    app.add_handler(CommandHandler("profile", profile))
+    app.add_handler(CommandHandler("help", help_cmd))
+    app.add_handler(CommandHandler("myid", myid))
+    app.add_handler(CommandHandler("chatid", chatid))
 
-        app.add_handler(CommandHandler("players", players_cmd))
-        app.add_handler(CommandHandler("pending", pending_cmd))
-        app.add_handler(CommandHandler("broadcast", broadcast))
-        app.add_handler(CommandHandler("remove", remove))
-        app.add_handler(CommandHandler("open", open_reg))
-        app.add_handler(CommandHandler("close", close_reg))
-        app.add_handler(CommandHandler("export", export_players))
-        app.add_handler(CommandHandler("backup", backup))
-        app.add_handler(CommandHandler("restore", restore))
+    app.add_handler(CommandHandler("players", players_cmd))
+    app.add_handler(CommandHandler("pending", pending_cmd))
+    app.add_handler(CommandHandler("broadcast", broadcast))
+    app.add_handler(CommandHandler("remove", remove))
+    app.add_handler(CommandHandler("open", open_reg))
+    app.add_handler(CommandHandler("close", close_reg))
+    app.add_handler(CommandHandler("export", export_players))
+    app.add_handler(CommandHandler("backup", backup))
+    app.add_handler(CommandHandler("restore", restore))
 
-        app.add_handler(CallbackQueryHandler(button_handler))
-        app.add_handler(MessageHandler(filters.Document.ALL, document_handler))
+    app.add_handler(CallbackQueryHandler(button_handler))
+    app.add_handler(MessageHandler(filters.Document.ALL, document_handler))
 
-        app.add_error_handler(error_handler)
+    app.add_error_handler(error_handler)
 
-        print("Bot running...")
-        await app.run_polling()
+    print("Bot running...")
+    app.run_polling()
 
-    asyncio.run(run())
+
+if __name__ == "__main__":
+    main()
 
 if __name__ == "__main__":
     main()
